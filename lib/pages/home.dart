@@ -1,4 +1,5 @@
 import 'package:book_stash/pages/books.dart';
+import 'package:book_stash/service/auth_service.dart';
 import 'package:book_stash/service/database.dart';
 import 'package:book_stash/utils/toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -96,7 +97,11 @@ dynamic getInfoInit() async {
     return Scaffold(
       appBar: AppBar(
         title: Text("Book Stash"),
-        centerTitle: true,
+        // centerTitle: true,
+        actions: [IconButton(onPressed: () async{
+          await AuthServiceHelper.logout();
+          Navigator.pushReplacementNamed(context, "/login");
+        }, icon: Icon(Icons.logout_rounded))],
       ),
       body: Container(
       margin: EdgeInsets.only(left: 10,right: 10,top: 25),
